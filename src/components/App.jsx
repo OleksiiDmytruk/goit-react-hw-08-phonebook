@@ -6,7 +6,7 @@ import { Section } from './Section/Section';
 import { ContactList } from './ContactList/ContactList';
 import { ContactFilter } from './ContactFilter/ContactFilter';
 import { useDispatch } from 'react-redux';
-import { fetchContacts } from 'redax/operations';
+import { fetchContacts } from 'redax/contacts/operations';
 import { useEffect } from 'react';
 
 export const App = () => {

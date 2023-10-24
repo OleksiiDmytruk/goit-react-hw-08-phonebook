@@ -3,8 +3,8 @@ import * as Yup from 'yup';
 import { FormStyle, ErrMessage, Lable, Btn } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
-import { selectContacts } from 'redax/selectors';
-import { addContact } from 'redax/operations';
+import { selectContacts } from 'redax/contacts/selectors';
+import { addContact } from 'redax/contacts/operations';
 
 const nameRegex =
   "^[a-zA-Zа-щьюяґєіїА-ЩЬЮЯҐЄІЇ]+(([' \\-][a-zA-Zа-щьюяґєіїА-ЩЬЮЯҐЄІЇ ])?[a-zA-Zа-щьюяґєіїА-ЩЬЮЯҐЄІЇ]*)*$";
@@ -16,7 +16,7 @@ const contactSchema = Yup.object().shape({
     .matches(nameRegex, 'Name is not valid')
     .required('Name is required')
     .trim(),
-  phone: Yup.string()
+  number: Yup.string()
     .matches(phoneRegex, 'Phone number is not valid')
     .length(13, 'Phone number is not valid')
     .required('Phone number is required')
@@ -43,7 +43,7 @@ export const ContactForm = () => {
 
   return (
     <Formik
-      initialValues={{ name: '', phone: '' }}
+      initialValues={{ name: '', number: '' }}
       validationSchema={contactSchema}
       onSubmit={(values, actions) => {
         onAdd(values);
@@ -58,8 +58,8 @@ export const ContactForm = () => {
         </Lable>
         <Lable>
           Number
-          <Field name="phone" type="tel" placeholder="+380 11111 1111" />
-          <ErrMessage name="phone" component="div" />
+          <Field name="number" type="tel" placeholder="+380 11111 1111" />
+          <ErrMessage name="number" component="div" />
         </Lable>
         <Btn type="submit">Add contact</Btn>
       </FormStyle>
