@@ -1,6 +1,11 @@
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
-import { FormStyle, ErrMessage, Lable, Btn } from './ContactForm.styled';
+import {
+  FormStyle,
+  ErrMessage,
+  Lable,
+  Btn,
+} from 'components/ContactForm/ContactForm.styled';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redax/auth/operations';
 

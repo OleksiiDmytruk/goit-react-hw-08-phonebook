@@ -1,12 +1,18 @@
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
-import { FormStyle, ErrMessage, Lable, Btn } from './ContactForm.styled';
+
 import { useDispatch } from 'react-redux';
 import { register } from 'redax/auth/operations';
+import {
+  FormStyle,
+  ErrMessage,
+  Lable,
+  Btn,
+} from 'components/ContactForm/ContactForm.styled';
 
 const nameRegex =
   "^[a-zA-Zа-щьюяґєіїА-ЩЬЮЯҐЄІЇ]+(([' \\-][a-zA-Zа-щьюяґєіїА-ЩЬЮЯҐЄІЇ ])?[a-zA-Zа-щьюяґєіїА-ЩЬЮЯҐЄІЇ]*)*$";
-const emailRegex = '/^[^s@]+@[^s@]+.[^s@]+$/';
+// const emailRegex = ' ^S+@S+.S+$';
 const contactSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, 'Name is too Short!')
@@ -14,24 +20,26 @@ const contactSchema = Yup.object().shape({
     .required('Name is required')
     .trim(),
   email: Yup.string()
-    .matches(emailRegex, 'Email  is not valid')
+    // .matches(emailRegex, 'Email  is not valid')
     .required('Email  is required')
     .trim(),
   password: Yup.string()
-    .length(8, 'Password  iis too Short!')
+    .min(6, 'Password  is too Short!')
     .required('Password  is required')
     .trim(),
 });
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
-
+  const handleSubmit = values => {
+    dispatch(register(values));
+  };
   return (
     <Formik
       initialValues={{ name: '', email: '', password: '' }}
       validationSchema={contactSchema}
       onSubmit={(values, actions) => {
-        dispatch(register(values));
+        handleSubmit(values);
         actions.resetForm();
       }}
     >
