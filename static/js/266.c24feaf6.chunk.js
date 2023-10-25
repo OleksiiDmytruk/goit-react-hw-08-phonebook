@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_hw_08_phonebook=self.webpackChunkreact_hw_08_phonebook||[]).push([[266],{1266:function(e,o,r){r.r(o),r.d(o,{Home:function(){return t}});var n=r(184),t=function(){return(0,n.jsx)("div",{children:(0,n.jsxs)("h2",{children:["Hello. Welcome to the phone book. ",(0,n.jsx)("br",{}),"To start work, register or log in"]})})};o.default=t}}]);
+//# sourceMappingURL=266.c24feaf6.chunk.js.map
