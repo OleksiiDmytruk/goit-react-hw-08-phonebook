@@ -9,7 +9,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redax/auth/operations';
 
-const emailRegex = '/^[^s@]+@[^s@]+.[^s@]+$/';
+const emailRegex = '^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$';
 
 const contactSchema = Yup.object().shape({
   email: Yup.string()
@@ -17,7 +17,7 @@ const contactSchema = Yup.object().shape({
     .required('Email  is required')
     .trim(),
   password: Yup.string()
-    .length(8, 'Password  iis too Short!')
+    .min(6, 'Password  is too Short!')
     .required('Password  is required')
     .trim(),
 });

@@ -12,7 +12,7 @@ import {
 
 const nameRegex =
   "^[a-zA-Zа-щьюяґєіїА-ЩЬЮЯҐЄІЇ]+(([' \\-][a-zA-Zа-щьюяґєіїА-ЩЬЮЯҐЄІЇ ])?[a-zA-Zа-щьюяґєіїА-ЩЬЮЯҐЄІЇ]*)*$";
-// const emailRegex = ' ^S+@S+.S+$';
+const emailRegex = '^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$';
 const contactSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, 'Name is too Short!')
@@ -20,7 +20,7 @@ const contactSchema = Yup.object().shape({
     .required('Name is required')
     .trim(),
   email: Yup.string()
-    // .matches(emailRegex, 'Email  is not valid')
+    .matches(emailRegex, 'Email  is not valid')
     .required('Email  is required')
     .trim(),
   password: Yup.string()
