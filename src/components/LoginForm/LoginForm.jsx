@@ -42,7 +42,7 @@ export const LoginForm = () => {
         </Lable>
         <Lable>
           Password
-          <Field name="password" type="text" />
+          <Field name="password" type="password" />
           <ErrMessage name="password" component="div" />
         </Lable>
         <Btn type="submit">Login</Btn>

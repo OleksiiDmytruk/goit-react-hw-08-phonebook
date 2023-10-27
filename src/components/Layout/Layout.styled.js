@@ -25,7 +25,7 @@ export const StyledLink = styled(NavLink)`
 
 export const Header = styled.header`
   display: flex;
-  align-items: start;
+  justify-content: space-around;
   width: 100%;
   border-bottom: 2px solid blue;
 `;
