@@ -35,9 +35,8 @@ export const Modal = ({ id, name, number, onClose }) => {
       <Formik
         initialValues={{ name, number }}
         validationSchema={contactSchema}
-        onSubmit={(values, actions) => {
+        onSubmit={values => {
           dispatch(updateContact({ id, values }));
-          actions.resetForm();
         }}
       >
         <FormStyle>
