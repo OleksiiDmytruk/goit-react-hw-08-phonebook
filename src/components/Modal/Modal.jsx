@@ -3,11 +3,12 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { updateContact } from 'redax/contacts/operations';
 import {
-  FormStyle,
   ErrMessage,
   Lable,
   Btn,
 } from 'components/ContactForm/ContactForm.styled';
+import { ImCancelCircle } from 'react-icons/im';
+import { Backdrop, CloseBtn, FormStyle } from './Modal.styled';
 
 const nameRegex =
   "^[a-zA-Zа-щьюяґєіїА-ЩЬЮЯҐЄІЇ]+(([' \\-][a-zA-Zа-щьюяґєіїА-ЩЬЮЯҐЄІЇ ])?[a-zA-Zа-щьюяґєіїА-ЩЬЮЯҐЄІЇ]*)*$";
@@ -28,34 +29,34 @@ const contactSchema = Yup.object().shape({
 
 export const Modal = ({ id, name, number, onClose }) => {
   const dispatch = useDispatch();
-  const handleChange = contact => {
-    dispatch(updateContact(id, contact));
-  };
-  return (
-    <Formik
-      initialValues={{ name, number }}
-      validationSchema={contactSchema}
-      onSubmit={(values, actions) => {
-        handleChange(values);
-        console.log(values);
-        actions.resetForm();
-      }}
-    >
-      <FormStyle>
-        <Btn onClick={onClose}>Close</Btn>
 
-        <Lable>
-          Name
-          <Field name="name" type="text" />
-          <ErrMessage name="name" component="div" />
-        </Lable>
-        <Lable>
-          Number
-          <Field name="number" type="tel" />
-          <ErrMessage name="number" component="div" />
-        </Lable>
-        <Btn type="submit">Add change</Btn>
-      </FormStyle>
-    </Formik>
+  return (
+    <Backdrop>
+      <Formik
+        initialValues={{ name, number }}
+        validationSchema={contactSchema}
+        onSubmit={(values, actions) => {
+          dispatch(updateContact({ id, values }));
+          actions.resetForm();
+        }}
+      >
+        <FormStyle>
+          <CloseBtn type="button" onClick={onClose}>
+            <ImCancelCircle />
+          </CloseBtn>
+          <Lable>
+            Name
+            <Field name="name" type="text" />
+            <ErrMessage name="name" component="div" />
+          </Lable>
+          <Lable>
+            Number
+            <Field name="number" type="tel" />
+            <ErrMessage name="number" component="div" />
+          </Lable>
+          <Btn type="submit">Add change</Btn>
+        </FormStyle>
+      </Formik>
+    </Backdrop>
   );
 };
